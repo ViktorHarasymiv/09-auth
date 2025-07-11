@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-import { nextServer } from "./clientApi";
+import { serverApi } from "./api";
 import { Note } from "../types/note";
 
 interface NotesHttpResponse {
@@ -20,7 +20,7 @@ export const getServerNotes = async (
   });
   const cookieStore = await cookies();
 
-  const response = await nextServer.get("/notes", {
+  const response = await serverApi.get("/notes", {
     params: PARAMS,
     headers: {
       Cookie: cookieStore.toString(),
