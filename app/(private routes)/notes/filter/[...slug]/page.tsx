@@ -4,8 +4,8 @@ import NotesClient from "./Notes.client";
 
 import css from "./NotesPage.module.css";
 
-import { Note } from "../../../../types/note";
-import { fetchNotes } from "../../../../lib/api";
+import { Note } from "../../../../../types/note";
+import { getServerNotes } from "../../../../../lib/serverApi";
 
 interface NotesHttpResponse {
   notes: Note[];
@@ -42,17 +42,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const Notes = async ({ params }: Props) => {
+const NotesPage = async ({ params }: Props) => {
   const { slug } = await params;
-  const category = slug[0] === "All" ? "" : slug[0];
+  const tag = slug[0] === "All" ? "" : slug[0];
 
-  const response: NotesHttpResponse = await fetchNotes("", 1, category);
+  const response: NotesHttpResponse = await getServerNotes("", 1, tag);
 
   return (
     <section className={css.app}>
-      <NotesClient initialValue={response} tag={category} />
+      <NotesClient initialValue={response} tag={tag} />
     </section>
   );
 };
 
-export default Notes;
+export default NotesPage;

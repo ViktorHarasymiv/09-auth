@@ -1,0 +1,107 @@
+import axios from "axios";
+
+import { Note } from "../types/note";
+import { NewNote } from "../types/note";
+
+import {
+  RegisterRequest,
+  User,
+  CheckSessionRequest,
+  LoginRequest,
+} from "../types/user";
+
+interface NotesHttpResponse {
+  notes: Note[];
+  totalPages: number;
+}
+
+export const nextServer = axios.create({
+  baseURL: "http://localhost:3000/api",
+  withCredentials: true,
+});
+
+export const fetchNotes = async (
+  query: string,
+  page: number,
+  tag?: string
+): Promise<NotesHttpResponse> => {
+  const PARAMS = new URLSearchParams({
+    ...(query !== "" ? { search: query } : {}),
+
+    ...(tag !== "" ? { tag } : {}),
+    page: page.toString(),
+  });
+
+  const response = await nextServer.get<NotesHttpResponse>("/notes", {
+    params: PARAMS,
+  });
+
+  return response.data;
+};
+
+// POST FETCH
+
+export const createNote = async (newNote: NewNote): Promise<Note> => {
+  const response = await axios.post<Note>("/notes", newNote, {
+    headers: {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
+    },
+  });
+  return response.data;
+};
+
+// FETCH NOTE BY ID
+
+export const fetchNoteById = async (id: number): Promise<Note> => {
+  const response = await axios.get<Note>(`/notes/${id}`, {
+    headers: {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
+    },
+  });
+  return response.data;
+};
+
+// DELETE POST
+
+export const deleteNote = async (id: number): Promise<Note> => {
+  const response = await axios.delete<Note>(`/notes/${id}`, {
+    headers: {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
+    },
+  });
+  return response.data;
+};
+
+// REGISTER
+
+export const register = async (data: RegisterRequest) => {
+  const res = await nextServer.post<User>("/auth/register", data);
+  return res.data;
+};
+
+// LOGIN
+
+export const login = async (data: LoginRequest) => {
+  const res = await nextServer.post<User>("/auth/login", data);
+  return res.data;
+};
+
+// CHECK SESSION
+
+export const checkSession = async () => {
+  const res = await nextServer.get<CheckSessionRequest>("/auth/session");
+  return res.data.success;
+};
+
+// AUTH ME
+
+export const getMe = async () => {
+  const { data } = await nextServer.get<User>("/auth/me");
+  return data;
+};
+
+// LOGOUT
+
+export const logout = async (): Promise<void> => {
+  await nextServer.post("/auth/logout");
+};

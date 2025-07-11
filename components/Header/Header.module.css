@@ -23,12 +23,29 @@
   margin: 0;
   padding: 0;
   display: flex;
+  align-items: center;
+  gap: 20px;
+
   gap: 1rem;
 }
 
 .navigationItem {
+  position: relative;
+
   display: flex;
   align-items: center;
+}
+
+.navigationItem:first-child::before {
+  position: absolute;
+
+  content: "";
+  right: -8px;
+
+  width: 0.5px;
+  height: 50%;
+
+  background-color: #ffffff;
 }
 
 .navigationLink {
