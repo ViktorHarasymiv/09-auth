@@ -5,6 +5,7 @@ import NotesClient from "./Notes.client";
 import css from "./NotesPage.module.css";
 
 import { Note } from "../../../../../types/note";
+
 import { getServerNotes } from "../../../../../lib/serverApi";
 
 interface NotesHttpResponse {

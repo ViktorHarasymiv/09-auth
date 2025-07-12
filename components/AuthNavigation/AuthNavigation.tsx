@@ -19,13 +19,12 @@ const AuthNavigation = () => {
     clearIsAuthenticated();
     router.push("/sign-in");
   };
-
-  // Якщо є сесія - відображаємо Logout та інформацію про користувача
-  // інакше - посилання на логін та реєстрацію
   return isAuthenticated ? (
     <>
       <li className={css.navigationItem}>
-        <p className={css.userEmail}>{user?.email}</p>
+        <p className={css.userEmail}>
+          {user?.username ? user?.username : user?.email}
+        </p>
       </li>
       <li className={css.navigationItem}>
         <Link href="/profile" prefetch={false} className={css.navigationLink}>

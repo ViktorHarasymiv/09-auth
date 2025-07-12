@@ -16,13 +16,13 @@ export default function ProfilePage() {
       <div className={css.profileCard}>
         <div className={css.header}>
           <h1 className={css.formTitle}>Profile Page</h1>
-          <Link href="" className={css.editProfileButton}>
+          <Link href="profile/edit" className={css.editProfileButton}>
             Edit Profile
           </Link>
         </div>
         <div className={css.avatarWrapper}>
           <Image
-            src="/Avatar.png"
+            src="/images/avatar.png"
             alt="User Avatar"
             width={120}
             height={120}
@@ -31,7 +31,7 @@ export default function ProfilePage() {
         </div>
         <div className={css.profileInfo}>
           <p>Username: {user ? user.username : "undefined"}</p>
-          <p>Email: {user ? user.username : "undefined"}</p>
+          <p>Email: {user ? user.email : "undefined"}</p>
         </div>
       </div>
     </main>

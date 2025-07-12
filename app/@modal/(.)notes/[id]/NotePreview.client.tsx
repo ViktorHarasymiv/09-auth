@@ -13,7 +13,7 @@ const NotePreview = () => {
   const close = () => router.back();
 
   const { id } = useParams<{ id: string }>();
-  const noteId = Number(id);
+  const noteId = id;
 
   const {
     data: note,

@@ -39,22 +39,14 @@ export const fetchNotes = async (
 // POST FETCH
 
 export const createNote = async (newNote: NewNote): Promise<Note> => {
-  const response = await axios.post<Note>("/notes", newNote, {
-    headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
-    },
-  });
+  const response = await serverApi.post("/notes", newNote);
   return response.data;
 };
 
 // FETCH NOTE BY ID
 
-export const fetchNoteById = async (id: number): Promise<Note> => {
-  const response = await axios.get<Note>(`/notes/${id}`, {
-    headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
-    },
-  });
+export const fetchNoteById = async (id: string): Promise<Note> => {
+  const response = await serverApi.get<Note>(`/notes/${id}`);
   return response.data;
 };
 
@@ -80,6 +72,13 @@ export const register = async (data: RegisterRequest) => {
 
 export const login = async (data: LoginRequest) => {
   const res = await serverApi.post<User>("/auth/login", data);
+  return res.data;
+};
+
+// PATCH
+
+export const editProfile = async (data: RegisterRequest) => {
+  const res = await serverApi.patch<User>("/users/me", data);
   return res.data;
 };
 
