@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Note } from "../../types/note";
 import css from "./NoteList.module.css";
 
-import { deleteNote } from "../../lib/clientApi";
+import { deleteNote } from "../../lib/api/clientApi";
 
 type NoteListProps = {
   notes: Note[];

@@ -8,8 +8,8 @@ import { cookies } from "next/headers";
 
 // TYPES
 
-import { Note, NewNote } from "../types/note";
-import { User } from "../types/user";
+import { Note, NewNote } from "../../types/note";
+import { User } from "../../types/user";
 
 interface NotesHttpResponse {
   notes: Note[];

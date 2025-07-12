@@ -6,7 +6,7 @@ import css from "./NotesPage.module.css";
 
 import { Note } from "../../../../../types/note";
 
-import { getServerNotes } from "../../../../../lib/serverApi";
+import { getServerNotes } from "../../../../../lib/api/serverApi";
 
 interface NotesHttpResponse {
   notes: Note[];

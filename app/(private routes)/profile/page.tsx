@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import css from "./ProfilePage.module.css";
 
-import { getServerMe } from "../../../lib/serverApi";
+import { getServerMe } from "../../../lib/api/serverApi";
 
 export const metadata: Metadata = {
   title: "User Profile",

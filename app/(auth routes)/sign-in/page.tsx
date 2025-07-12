@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { LoginRequest } from "../../../types/user";
-import { login } from "../../../lib/clientApi";
+import { login } from "../../../lib/api/clientApi";
 import { useAuthStore } from "../../../lib/store/authStore";
 
 import css from "./SignInPage.module.css";

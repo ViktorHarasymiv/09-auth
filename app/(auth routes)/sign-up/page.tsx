@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { register } from "../../../lib/clientApi";
+import { register } from "../../../lib/api/clientApi";
 import { RegisterRequest } from "../../../types/user";
 import { useAuthStore } from "../../../lib/store/authStore";
 

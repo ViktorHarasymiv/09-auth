@@ -7,7 +7,7 @@ import Link from "next/link";
 // API / STORE
 
 import { useAuthStore } from "../../../../lib/store/authStore";
-import { editProfile } from "../../../../lib/clientApi";
+import { editProfile } from "../../../../lib/api/clientApi";
 
 // TYPES
 

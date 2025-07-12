@@ -10,7 +10,7 @@ import SearchBox from "../../../../../components/SearchBox/SearchBox";
 import { Note } from "../../../../../types/note";
 import css from "./NotesPage.module.css";
 
-import { fetchNotes } from "../../../../../lib/clientApi";
+import { fetchNotes } from "../../../../../lib/api/clientApi";
 import Pagination from "../../../../../components/Pagination/Pagination";
 
 type NotesHttpResponse = {

@@ -1,5 +1,5 @@
-import { Note } from "../types/note";
-import { NewNote } from "../types/note";
+import { Note } from "../../types/note";
+import { NewNote } from "../../types/note";
 
 import { serverApi } from "./api";
 
@@ -9,7 +9,7 @@ import {
   CheckSessionRequest,
   LoginRequest,
   UpdateUserRequest,
-} from "../types/user";
+} from "../../types/user";
 
 interface NotesHttpResponse {
   notes: Note[];
