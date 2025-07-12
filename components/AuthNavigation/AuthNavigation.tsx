@@ -26,11 +26,6 @@ const AuthNavigation = () => {
           {user?.username ? user?.username : user?.email}
         </p>
       </li>
-      <li className={css.navigationItem}>
-        <Link href="/profile" prefetch={false} className={css.navigationLink}>
-          Profile
-        </Link>
-      </li>
       <li>
         <button onClick={handleLogout} className={css.logoutButton}>
           Log out

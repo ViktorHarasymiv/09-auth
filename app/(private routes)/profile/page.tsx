@@ -1,16 +1,34 @@
-"use client";
+import { Metadata } from "next";
 
-import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 
 import css from "./ProfilePage.module.css";
-import Link from "next/link";
 
-import { useAuthStore } from "../../../lib/store/authStore";
+import { getServerMe } from "../../../lib/serverApi";
 
-export default function ProfilePage() {
-  const { user } = useAuthStore();
+export const metadata: Metadata = {
+  title: "User Profile",
+  description:
+    "View and manage your personal information, notes, and settings in your profile.",
+  openGraph: {
+    title: "User Profile",
+    description:
+      "View and manage your personal information, notes, and settings in your profile.",
+    url: "/profile",
+    images: [
+      {
+        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+        width: 1200,
+        height: 630,
+        alt: "User profile preview",
+      },
+    ],
+  },
+};
 
+const ProfilePage = async () => {
+  const user = await getServerMe();
   return (
     <main className={css.mainContent}>
       <div className={css.profileCard}>
@@ -22,7 +40,7 @@ export default function ProfilePage() {
         </div>
         <div className={css.avatarWrapper}>
           <Image
-            src="/images/avatar.png"
+            src={user.avatar}
             alt="User Avatar"
             width={120}
             height={120}
@@ -36,4 +54,6 @@ export default function ProfilePage() {
       </div>
     </main>
   );
-}
+};
+
+export default ProfilePage;

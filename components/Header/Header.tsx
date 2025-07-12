@@ -22,6 +22,15 @@ const Header = () => {
               Home
             </Link>
           </li>
+          <li className={css.navigationItem}>
+            <Link
+              href="/profile"
+              prefetch={false}
+              className={css.navigationLink}
+            >
+              Profile
+            </Link>
+          </li>
           {isAuthenticated && (
             <li className={css.navigationItem}>
               <TagsMenu />

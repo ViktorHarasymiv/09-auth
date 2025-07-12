@@ -1,6 +1,13 @@
-import { cookies } from "next/headers";
+// INITIAL
 
 import { serverApi } from "./api";
+
+// COOKIES
+
+import { cookies } from "next/headers";
+
+// TYPES
+
 import { Note, NewNote } from "../types/note";
 import { User } from "../types/user";
 
@@ -9,7 +16,7 @@ interface NotesHttpResponse {
   totalPages: number;
 }
 
-// Notes
+// GET NOTES
 
 export const getServerNotes = async (
   query: string,
@@ -57,9 +64,45 @@ export const fetchServerNoteById = async (id: string) => {
   return response.data;
 };
 
+// DELETE POST
+
+export const deleteServerNote = async (id: string) => {
+  const cookieStore = await cookies();
+  const response = await serverApi.delete<Note>(`/notes/${id}`, {
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  });
+  return response.data;
+};
+
 // EDIT PROFILE
 
 export const editProfile = async (data: User) => {
   const res = await serverApi.patch("/users/me", data);
   return res.data;
+};
+
+// PRIVAT USER
+
+export const getServerMe = async (): Promise<User> => {
+  const cookieStore = await cookies();
+  const { data } = await serverApi.get("/users/me", {
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  });
+  return data;
+};
+
+// CHECK SESSION
+
+export const checkServerSession = async () => {
+  const cookieStore = await cookies();
+  const response = await serverApi.get("/auth/session", {
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  });
+  return response;
 };

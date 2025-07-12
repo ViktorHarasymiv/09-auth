@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import { Note } from "../types/note";
 import { NewNote } from "../types/note";
 
@@ -10,6 +8,7 @@ import {
   User,
   CheckSessionRequest,
   LoginRequest,
+  UpdateUserRequest,
 } from "../types/user";
 
 interface NotesHttpResponse {
@@ -53,11 +52,7 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
 // DELETE POST
 
 export const deleteNote = async (id: string): Promise<Note> => {
-  const response = await axios.delete<Note>(`/notes/${id}`, {
-    headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
-    },
-  });
+  const response = await serverApi.delete<Note>(`/notes/${id}`);
   return response.data;
 };
 
@@ -79,6 +74,13 @@ export const login = async (data: LoginRequest) => {
 
 export const editProfile = async (data: RegisterRequest) => {
   const res = await serverApi.patch<User>("/users/me", data);
+  return res.data;
+};
+
+// UPDATE IMAGE
+
+export const updateMe = async (payload: UpdateUserRequest) => {
+  const res = await serverApi.put<User>("/auth/me", payload);
   return res.data;
 };
 

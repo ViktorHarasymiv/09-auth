@@ -23,8 +23,6 @@ export default function EditPage() {
   const { user } = useAuthStore();
   const [error, setError] = useState("");
 
-  console.log(user);
-
   const setUser = useAuthStore((state) => state.setUser);
 
   const hundleEditProfile = async (formData: FormData) => {
@@ -51,13 +49,16 @@ export default function EditPage() {
     <main className={css.mainContent}>
       <div className={css.profileCard}>
         <h1 className={css.formTitle}>Edit Profile</h1>
-        <Image
-          src="/images/avatar.png"
-          alt="User Avatar"
-          width={120}
-          height={120}
-          className={css.avatar}
-        />
+        <div className={css.avatar}>{/* <AvatarPicker /> */}</div>
+        {user && (
+          <Image
+            src={user.avatar}
+            alt="User Avatar"
+            width={120}
+            height={120}
+            className={css.avatar}
+          />
+        )}
         <form
           onSubmit={async (e) => {
             e.preventDefault();
