@@ -74,6 +74,7 @@ export default function EditPage() {
               name="username"
               type="text"
               className={css.input}
+               placeholder={user?.username}
               required
             />
           </div>
