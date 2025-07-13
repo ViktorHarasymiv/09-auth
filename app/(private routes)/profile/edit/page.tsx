@@ -2,8 +2,6 @@
 import { useState } from "react";;
 import { useRouter } from "next/navigation";
 
-import Link from "next/link";
-
 // API / STORE
 
 import { useAuthStore } from "../../../../lib/store/authStore";
@@ -45,7 +43,9 @@ export default function EditPage() {
     }
   };
 
-const handleCancel = () => {router.back(); }
+const handleCancel = () => {
+router.back(); 
+};
 
   return (
     <main className={css.mainContent}>
