@@ -97,15 +97,3 @@ const handleCancel = () => {router.back(); }
     </main>
   );
 }
-
-className={css.cancelButton}>
-                Cancel
-              </button>
-            
-          </div>
-        </form>
-        {error && <p>{error}</p>}
-      </div>
-    </main>
-  );
-}
