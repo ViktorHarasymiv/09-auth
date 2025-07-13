@@ -11,7 +11,7 @@ import { editProfile } from "../../../../lib/api/clientApi";
 
 // TYPES
 
-import { RegisterRequest } from "../../../../types/user";
+import { UpdateUserRequest } from "../../../../types/user";
 
 // MEDIA
 
@@ -27,7 +27,7 @@ export default function EditPage() {
 
   const hundleEditProfile = async (formData: FormData) => {
     try {
-      const formValues = Object.fromEntries(formData) as RegisterRequest;
+      const formValues = Object.fromEntries(formData) as UpdateUserRequest;
       console.log(formValues);
 
       const res = await editProfile(formValues);
