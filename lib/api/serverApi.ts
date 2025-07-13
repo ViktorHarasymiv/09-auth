@@ -54,7 +54,7 @@ export const createServerNote = async (newNote: NewNote): Promise<Note> => {
 
 // FETCH NOTE BY ID
 
-export const fetchServerNoteById = async (id: string) => {
+export const fetchServerNoteById = async (id: string): Promise<Note> => {
   const cookieStore = await cookies();
   const response = await serverApi.get(`/notes/${id}`, {
     headers: {
@@ -79,7 +79,12 @@ export const deleteServerNote = async (id: string) => {
 // EDIT PROFILE
 
 export const editProfile = async (data: User) => {
-  const res = await serverApi.patch("/users/me", data);
+  const cookieStore = await cookies();
+  const res = await serverApi.patch("/users/me", data, {
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  });
   return res.data;
 };
 
@@ -97,7 +102,7 @@ export const getServerMe = async (): Promise<User> => {
 
 // CHECK SESSION
 
-export const checkServerSession = async () => {
+export const checkSession = async () => {
   const cookieStore = await cookies();
   const response = await serverApi.get("/auth/session", {
     headers: {

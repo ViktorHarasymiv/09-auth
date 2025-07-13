@@ -1,7 +1,7 @@
 import { Note } from "../../types/note";
 import { NewNote } from "../../types/note";
 
-import { serverApi } from "./api";
+import { serverApi } from "../api/api";
 
 import {
   RegisterRequest,
@@ -24,7 +24,7 @@ export const fetchNotes = async (
   const PARAMS = new URLSearchParams({
     ...(query !== "" ? { search: query } : {}),
 
-    ...(tag !== "" ? { tag } : {}),
+    ...(tag !== undefined ? { tag } : null),
     page: page.toString(),
   });
 
@@ -72,15 +72,8 @@ export const login = async (data: LoginRequest) => {
 
 // PATCH
 
-export const editProfile = async (data: RegisterRequest) => {
+export const editProfile = async (data: UpdateUserRequest) => {
   const res = await serverApi.patch<User>("/users/me", data);
-  return res.data;
-};
-
-// UPDATE IMAGE
-
-export const updateMe = async (payload: UpdateUserRequest) => {
-  const res = await serverApi.put<User>("/auth/me", payload);
   return res.data;
 };
 
@@ -93,8 +86,8 @@ export const checkSession = async () => {
 
 // AUTH ME
 
-export const getMe = async () => {
-  const { data } = await serverApi.get<User>("/auth/me");
+export const getMe = async (): Promise<User> => {
+  const { data } = await serverApi.get<User>("/users/me");
   return data;
 };
 

@@ -14,6 +14,8 @@ const AuthNavigation = () => {
     (state) => state.clearIsAuthenticated
   );
 
+  console.log(isAuthenticated);
+
   const handleLogout = async () => {
     await logout();
     clearIsAuthenticated();
